@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 主题随笔</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf9f7;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1e1e1e;
+            line-height: 1.7;
+            padding: 2rem 1.5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 680px;
+            width: 100%;
+        }
+
+        /* 文章头部 */
+        .post-header {
+            margin-top: 1.5rem;
+            margin-bottom: 2.8rem;
+            border-bottom: 1px solid #e5e1db;
+            padding-bottom: 2rem;
+        }
+
+        .post-header .label {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #7a756e;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        h1 {
+            font-weight: 550;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-bottom: 1.2rem;
+            color: #1a1a1a;
+        }
+
+        .lead {
+            font-size: 1.05rem;
+            color: #4a4640;
+            border-left: 3px solid #c4b8a8;
+            padding-left: 1.3rem;
+            margin-bottom: 0.2rem;
+            font-weight: 380;
+        }
+
+        /* 正文排版 */
+        .content p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: #2a2825;
+        }
+
+        .content p:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        .content blockquote {
+            margin: 2rem 0 2rem 0;
+            padding: 1rem 1.6rem;
+            background-color: #f2efe9;
+            border-radius: 2px;
+            font-style: normal;
+            border-left: 4px solid #a39484;
+            color: #3e3a34;
+            font-size: 0.95rem;
+        }
+
+        .content blockquote footer {
+            margin-top: 0.6rem;
+            font-size: 0.85rem;
+            color: #6f6a62;
+            text-align: right;
+        }
+
+        .content .highlight-sentence {
+            margin: 2rem 0;
+            padding: 1.2rem 1.6rem;
+            background: #f0ede8;
+            border-radius: 4px;
+            font-size: 1.05rem;
+            font-weight: 420;
+            color: #1f1d19;
+            border: 1px solid #dfd9d0;
+        }
+
+        .content a {
+            color: #1a1a1a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #b3a597;
+            font-weight: 450;
+            transition: text-decoration-color 0.2s ease;
+        }
+
+        .content a:hover {
+            text-decoration-color: #1a1a1a;
+        }
+
+        /* 分节小标题 */
+        .section-title {
+            font-weight: 520;
+            font-size: 1.3rem;
+            letter-spacing: -0.01em;
+            margin-top: 2.8rem;
+            margin-bottom: 1rem;
+            color: #1c1b18;
+            border-top: 1px solid #e1dbd2;
+            padding-top: 2rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        /* 场景列表（极简） */
+        .scene-list {
+            list-style: none;
+            margin: 1.2rem 0 1.8rem 0;
+        }
+
+        .scene-list li {
+            padding: 0.25rem 0 0.25rem 1.2rem;
+            position: relative;
+            color: #2b2824;
+            margin-bottom: 0.5rem;
+        }
+
+        .scene-list li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #9b8c7b;
+            font-weight: 600;
+        }
+
+        /* FAQ 摘要 */
+        .faq-item {
+            margin: 1.6rem 0;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px dashed #ddd7cd;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            color: #1b1916;
+        }
+
+        .faq-answer {
+            color: #4b4740;
+            font-size: 0.95rem;
+            margin-top: 0.1rem;
+        }
+
+        /* 底部 */
+        .post-footer {
+            margin-top: 3.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e1db;
+            font-size: 0.85rem;
+            color: #7a756e;
+        }
+
+        .post-footer span {
+            display: inline-block;
+            margin-right: 1.5rem;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1.5rem 1rem 3rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .lead {
+                font-size: 0.95rem;
+                padding-left: 1rem;
+            }
+
+            .content blockquote {
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <article>
+            <!-- 文章头部 -->
+            <header class="post-header">
+                <span class="label">简 介 随 笔 · 主 题 篇</span>
+                <h1>体与会的两面：从行动到共鸣</h1>
+                <div class="lead">
+                    一个语词，往往同时容纳体验与方法。“华体会”不指向单一入口，而指向一种持续的参与、认知与再表达。
+                </div>
+            </header>
+
+            <!-- 正文内容 -->
+            <div class="content">
+
+                <p>
+                    当我们谈论“体会”，通常指涉两层意涵：其一为亲身经历后获得的理解，其二为将理解转化为可交流的洞见。而“华”字在此处并非浮饰，它暗示着事物内核中那些精致、明亮、值得被辨认的部分。将三者叠合，<a href="https://homeapp-hth.com.cn">华体会</a>所承载的是一种主动的、带有辨识度的参与方式——不是被动接收，而是通过行动抵达认知。
+                </p>
+
+                <p>
+                    在信息流快速更迭的当下，多数平台倾向于缩短用户的停留时间、降低思考成本。但“体会”天然拒绝速成。它要求主体进入语境、调动感官、建立关联，甚至允许困惑与反复。正因如此，那些真正被“体会”过的内容，往往比单纯浏览过的信息留存更久，也更能内化为判断的依据。
+                </p>
+
+                <blockquote>
+                    “理解一个事物，最好的方式不是分析它，而是先让它进入你的经验。”
+                    <footer>—— 引自日常观察笔记，2025</footer>
+                </blockquote>
+
+                <p>
+                    这并非某种抽象主张。在设计、决策、学习甚至日常对话中，“体会”都表现为一种具体的方法：先浸泡，再提炼；先观察结构，再寻找表达。正如一位长期使用者所形容的：<strong>不是找到答案，而是让问题变得更清晰</strong>。这种迂回的前进方式，反而更接近真实理解的路径。
+                </p>
+
+                <div class="highlight-sentence">
+                    “华体会”不是终点标识，而是一组持续的动作——打开、阅读、比对、反思、再打开。
+                </div>
+
+                <!-- 场景描述 -->
+                <h2 class="section-title">常见场景</h2>
+                <ul class="scene-list">
+                    <li>面对新领域时，不急于搜索结论，而是先浏览结构、建立初步框架</li>
+                    <li>阅读过程中标记存疑之处，返回再次查验，形成二次理解</li>
+                    <li>将不同来源的信息并置，观察冲突与吻合，提炼自己的判断</li>
+                    <li>在交流中以“我目前的体会是……”开头，保持开放而非断言</li>
+                </ul>
+
+                <p>
+                    这些场景的共同点在于：主体始终在场。体会不是自动发生的，它需要人主动将自己置于信息与经验交汇的位置。而平台或工具的角色，是提供那种可以反复进入、安静探索的环境——这也是<a href="https://homeapp-hth.com.cn">华体会</a>在结构上试图支持的事情：降低噪音，让人与内容直接相处。
+                </p>
+
+                <!-- FAQ 摘要 -->
+                <h2 class="section-title">常见疑问摘要</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">“华体会”是一个 app 还是一个概念？</div>
+                    <div class="faq-answer">两者皆是。它首先是一个可访问的线上空间（<a href="https://homeapp-hth.com.cn">华体会</a>），同时也指向一种理解方式。其设计围绕“低干扰、高留存”展开，适合需要深度阅读或反复参照的使用习惯。</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">适合哪些使用者？</div>
+                    <div class="faq-answer">对信息质量有要求、愿意花时间建立自己认知框架的人。无论是研究者、写作者，还是日常需要处理大量文本的从业者，都能从中找到适合自己的节奏。</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">与其他平台有何不同？</div>
+                    <div class="faq-answer">侧重“返回与停留”，而非刷新与消费。内容组织痕迹较轻，鼓励使用者形成自己的浏览路径和理解顺序，而非被推荐流牵引。</div>
+                </div>
+
+                <!-- 结尾句 -->
+                <p style="margin-top: 2.5rem; color: #4a4640;">
+                    如果只能留下一句话，或许这样更准确：<strong>体会，是让事物在时间里展开。</strong> 而打开 <a href="https://homeapp-hth.com.cn">华体会</a>，只是这个展开过程的第一个动作。
+                </p>
+
+            </div>
+
+            <!-- 文章底部信息 -->
+            <footer class="post-footer">
+                <span>主题随笔 · 2025</span>
+                <span>方向：简洁博客式</span>
+                <span>字数约 1100</span>
+            </footer>
+        </article>
+    </div>
+</body>
+</html>
