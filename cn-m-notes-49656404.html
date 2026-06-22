@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pg模拟器 · 轻量入口与功能导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #fce9d8 0%, #f9dcc2 55%, #f0cba7 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.6rem 1rem 3.2rem;
+            line-height: 1.65;
+            color: #2c2b28;
+        }
+
+        .page-wrapper {
+            max-width: 1180px;
+            width: 100%;
+        }
+
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.6rem;
+            background: rgba(255, 247, 238, 0.65);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 0.9rem 2rem;
+            border-radius: 48px;
+            margin-bottom: 3.6rem;
+            box-shadow: 0 4px 12px rgba(160, 110, 60, 0.08);
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.3rem;
+            letter-spacing: 0.02em;
+            color: #7f5a3c;
+        }
+
+        .nav-brand span {
+            background: #dbaa7a;
+            color: #fff;
+            padding: 0.1rem 0.7rem;
+            border-radius: 32px;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #5c4432;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #b07d54;
+            color: #3b2c1f;
+        }
+
+        /* 卡片通用 */
+        .card-white {
+            background: #fffffffa;
+            border-radius: 28px;
+            padding: 2.2rem 2.5rem;
+            box-shadow: 0 12px 28px rgba(130, 80, 40, 0.08), 0 2px 6px rgba(0,0,0,0.02);
+            margin-bottom: 2.4rem;
+            border: 1px solid rgba(235, 205, 175, 0.2);
+        }
+
+        /* hero 区 */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .hero .badge {
+            background: #dfb18a;
+            color: #2a1f16;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            padding: 0.25rem 1rem;
+            border-radius: 24px;
+            display: inline-block;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 650;
+            line-height: 1.2;
+            color: #2c1f16;
+            max-width: 700px;
+        }
+
+        .hero h1 a {
+            color: #9c6b40;
+            text-decoration: none;
+            border-bottom: 2px dashed #cfa074;
+            transition: border-color 0.15s;
+        }
+
+        .hero h1 a:hover {
+            border-bottom-style: solid;
+            border-color: #7f5532;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #4d3b2c;
+            max-width: 650px;
+            margin-top: 0.1rem;
+        }
+
+        /* 园区说明 / 再次访问角度 */
+        .intro-note {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1.8rem;
+            background: #f6eee6;
+            border-radius: 22px;
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 2.2rem;
+            border-left: 6px solid #dbaa7a;
+        }
+
+        .intro-note div {
+            flex: 1 1 180px;
+        }
+
+        .intro-note strong {
+            display: block;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #7f5a3c;
+            margin-bottom: 0.2rem;
+        }
+
+        .intro-note p {
+            font-size: 0.98rem;
+            color: #3d3025;
+        }
+
+        /* 三个场景模块 */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin: 2.2rem 0 1.4rem;
+        }
+
+        .scene-card {
+            background: #fefcf9;
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 4px 14px rgba(110, 70, 35, 0.05);
+            border: 1px solid #efe1d3;
+            transition: transform 0.1s ease, box-shadow 0.2s;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(140, 90, 45, 0.08);
+        }
+
+        .scene-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #4b3423;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .scene-card h3 span {
+            background: #d9b28d;
+            color: #2d1f13;
+            font-size: 0.7rem;
+            border-radius: 20px;
+            padding: 0.1rem 0.7rem;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #4f3a28;
+            margin-bottom: 0.6rem;
+        }
+
+        .scene-card .meta-tip {
+            font-size: 0.85rem;
+            color: #7f613e;
+            border-top: 1px solid #e6d4c2;
+            padding-top: 0.6rem;
+            margin-top: 0.4rem;
+        }
+
+        .scene-card a {
+            color: #9c6b40;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .scene-card a:hover {
+            text-decoration: underline;
+            color: #644a30;
+        }
+
+        /* 常见说明 (FAQ 摘要) */
+        .faq-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .faq-item {
+            padding: 0.6rem 0 0.6rem 0.8rem;
+            border-left: 4px solid #d9ad7e;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-size: 1rem;
+            color: #3b2b1d;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: #4e3b2a;
+        }
+
+        .faq-item .small-link {
+            font-size: 0.9rem;
+            color: #9f6f44;
+            margin-left: 0.2rem;
+        }
+
+        .faq-item .small-link a {
+            color: #875d38;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .more-hint {
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            background: #efe4d8;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            display: inline-block;
+            color: #3e2d1c;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #dccbbb;
+            margin: 1.2rem 0 1.8rem;
+            opacity: 0.35;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6a5340;
+            padding-top: 0.6rem;
+            opacity: 0.8;
+        }
+
+        /* 响应式 */
+        @media (max-width: 800px) {
+            .top-nav {
+                padding: 0.7rem 1.4rem;
+                border-radius: 32px;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+            .scenes-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .card-white {
+                padding: 1.6rem 1.4rem;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .scenes-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .intro-note {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <div class="nav-brand">
+            pg模拟器 <span>轻导航</span>
+        </div>
+        <div class="nav-links">
+            <a href="#scenes">场景</a>
+            <a href="#faq">说明</a>
+            <a href="https://cn-m-pgsimulator.com">pg模拟器</a>
+        </div>
+    </nav>
+
+    <!-- hero 核心介绍 -->
+    <div class="card-white hero">
+        <div class="badge">· 再次访问 · 收藏 · 持续关注</div>
+        <h1>
+            <a href="https://cn-m-pgsimulator.com">pg模拟器</a>
+            &nbsp;的轻量导航页
+        </h1>
+        <p>
+            保留一个纯粹的入口，方便每次回访时快速定位到核心功能。
+            本页汇集常用场景锚点与常见使用说明，省去重复查找的步骤。
+        </p>
+    </div>
+
+    <!-- 再次访问 / 收藏角度 简短区块 -->
+    <div class="intro-note">
+        <div>
+            <strong>⇄ 再次访问</strong>
+            <p>将当前页加入书签，下次从收藏夹直接打开即可回到熟悉的导航。无需记忆 URL。</p>
+        </div>
+        <div>
+            <strong>★ 收藏建议</strong>
+            <p>推荐把 <a href="https://cn-m-pgsimulator.com" style="color:#9c6b40;text-decoration:underline;">pg模拟器</a> 加入浏览器收藏栏，或固定为标签页。</p>
+        </div>
+        <div>
+            <strong>⟳ 持续关注</strong>
+            <p>页面内容会根据实际反馈迭代，保持简洁，不堆积冗余信息。</p>
+        </div>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <h2 style="font-weight:600; font-size:1.5rem; color:#3b2a1b; margin: 1.6rem 0 0.2rem;">常用场景</h2>
+    <div id="scenes" class="scenes-grid">
+        <div class="scene-card">
+            <h3>⚙️ 快速调参 <span>场景 A</span></h3>
+            <p>进入模拟环境后，利用侧边栏调整核心参数，观察实时反馈。页面不会频繁刷新，参数变化流畅。</p>
+            <div class="meta-tip">建议：先加载默认预设，再逐项微调。</div>
+        </div>
+        <div class="scene-card">
+            <h3>📋 对照参考 <span>场景 B</span></h3>
+            <p>打开 <a href="https://cn-m-pgsimulator.com">pg模拟器</a> 后同时打开文档或笔记，将模拟结果与预期对比，适合教学或验证场景。</p>
+            <div class="meta-tip">支持多标签对照，注意浏览器资源占用。</div>
+        </div>
+        <div class="scene-card">
+            <h3>🔁 回归检查 <span>场景 C</span></h3>
+            <p>对已有配置存档重新载入，运行模拟确认数据一致性。经常访问的用户可用此方式做迭代校验。</p>
+            <div class="meta-tip">历史存档保存在本地，清理浏览器数据前请先导出。</div>
+        </div>
+    </div>
+
+    <!-- 常见说明（FAQ摘要） -->
+    <div id="faq" class="card-white">
+        <h2 style="font-weight:600; font-size:1.4rem; color:#3b2a1b; margin-bottom:1.2rem;">常见说明 · 摘要</h2>
+        <div class="faq-block">
+            <div class="faq-item">
+                <strong>访问后页面加载内容有哪些？</strong>
+                <p>直接打开 <a href="https://cn-m-pgsimulator.com" style="color:#875d38;text-decoration:underline;">pg模拟器</a> 即进入模拟主界面。首次加载会获取基础配置包，耗时与网络环境有关。</p>
+            </div>
+            <div class="faq-item">
+                <strong>是否需要注册或登录？</strong>
+                <p>目前主流程无需注册，所有模拟逻辑在客户端完成。部分高级功能或存档同步可能后续提供。</p>
+            </div>
+            <div class="faq-item">
+                <strong>数据持久化说明</strong>
+                <p>参数和结果默认保存在浏览器本地 (localStorage)。无服务器自动收集，隐私友好。</p>
+            </div>
+            <div class="faq-item">
+                <strong>如何反馈问题？</strong>
+                <p>页面底部有反馈入口（将于下次迭代加入），你也可以通过 GitHub Issues 提交。目前保持关注即可。</p>
+            </div>
+        </div>
+        <div class="more-hint">
+            ⚡ 建议将 <a href="https://cn-m-pgsimulator.com" style="color:#7f5532;text-decoration:underline;font-weight:500;">pg模拟器</a> 加入书签栏，下次回来直接打开。
+        </div>
+    </div>
+
+    <hr>
+    <div class="footer-note">
+        <span>轻量导航 · 保持简洁 · 再次回访</span><br>
+        <span style="font-size:0.75rem; opacity:0.5;">v0.2 · 页面内容仅作指引</span>
+    </div>
+
+</div>
+</body>
+</html>
